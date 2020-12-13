@@ -1,0 +1,65 @@
+<div class="content" fxLayout="row wrap" fxLayoutAlign="center none" fxLayoutGap="16px grid" >
+  <form  #userAchat="ngForm" [(ngModel)]="federationAdd">
+    <div fxFlex="65%" fxFlex.xs="100%" fxFlex.sm="33%" >
+
+      <br>
+      <br>
+
+      <div class="example-container">
+
+
+        <mat-form-field class="example-full-width " >
+          <mat-label>Nom</mat-label>
+          <textarea matInput  id="nom" [(ngModel)]="federation.nom"
+                    required  [ngModelOptions]="{standalone: true}" name="nom" #nom="ngModel"  rows="1" cols="20"
+          [value]="placeholdernom"
+          ></textarea>
+          <mat-error
+            *ngIf="nom.errors && nom.errors.required"
+
+
+          >le nom est obligatoire</mat-error>
+
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Annee de fondation</mat-label>
+          <textarea
+            matInput required  [ngModelOptions]="{standalone: true}" [(ngModel)]="federation.annee" name="annee" #annee="ngModel"  id="annee"
+          [value]="placehlderannee"
+
+
+          ></textarea>
+          <mat-error
+            *ngIf="annee.errors && annee.errors.required"
+
+
+          >l' annee  est obligatoire</mat-error>
+        </mat-form-field>
+
+
+
+      </div>
+      <br>
+      <p-autoComplete [(ngModel)]="federation.pays"  name="pays" [suggestions]="filteredCountriesSingle" (completeMethod)="filterCountrySingle($event)" field="name" [size]="30"
+                      required                [placeholder]="placeholdercountry" [ngModelOptions]="{standalone: true}"     placeholder="pays" [minLength]="1" dropdown="true" #pays="ngModel"   id="country"
+
+      >
+
+        <mat-error
+          *ngIf="pays.errors && pays.errors.required"
+
+
+        >le pays est obligatoire</mat-error>
+      </p-autoComplete>
+
+      <br>
+      <br>
+      <button type="button" class="btn btn-danger btn-lg btn-block" (click)="updateFederation(nom , annee , pays)" >
+        Modifier
+      </button>
+
+    </div>
+  </form>
+</div>
+
+

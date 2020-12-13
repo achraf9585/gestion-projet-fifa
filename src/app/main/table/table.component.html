@@ -1,0 +1,47 @@
+
+<br>
+<br>
+
+<p-toast></p-toast>
+
+<button type="button" (click)="show()" pButton icon="pi pi-plus-circle" label="Ajouter Federation"></button>
+
+<p-table #dt [paginator]="true" [rows]="10"  [columns]="cols" [value]="donne" [rowsPerPageOptions]="[5,10,15,20]"
+         selectionMode="single" [(selection)]="selectedProduct1"
+         totalRecords="totalRecords" pageLinks="3"
+>
+  <ng-template pTemplate="caption">
+    <div style="text-align: right">
+      <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+      <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th *ngFor="let col of columns">
+        {{col.header}}
+      </th>
+      <th>CRUD</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowData let-columns="columns">
+    <tr>
+      <td *ngFor="let col of columns" #childupdate>
+        {{rowData[col.field]}}
+      </td>
+      <td><div class="demo-container p-p-0 p-p-sm-1 p-p-md-2 p-p-lg-3">
+        <button type="button" (click)="updateFederation(rowData.id)" pButton icon="pi pi-pencil" label="Modifier Federation"></button>
+
+        <p-button (click)="confirm2(rowData.id)" icon="pi pi-times" label="Effacer"  ></p-button>
+        <br>
+        <p-button (click)="getEquipesByFedId(rowData.id)" icon="pi pi-circle-off" label="Equipes"></p-button>
+        <br>
+
+      </div>
+
+      </td>
+    </tr>
+  </ng-template>
+
+</p-table>
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>

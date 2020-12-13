@@ -1,0 +1,36 @@
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches" >
+  <mat-toolbar color="warn" class="example-toolbar" style="background-color: #4A7FFB">
+    <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+    <!--<h1 class="example-app-name">Responsive App</h1>-->
+    <img class="example-app-name"  src="/assets/image/fifa.png"style="width: 130px;height: 57px;margin-left: 20px;">
+    <span class="example-spacer"></span>
+    <p *ngIf="user"> {{user?.displayName}} </p>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" (click)="logout()">
+      <mat-icon>logout</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="example-sidenav-container"
+                         [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
+                 [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+      <mat-nav-list>
+
+        <!--<button pButton pRipple (click)="goToHome()" type= "button" label="Abonnement" class="p-button-danger"></button>-->
+        <button mat-stroked-button color="warn" style="width: 150px" (click)="goToHome()">Equipes</button>
+      </mat-nav-list>
+      <mat-nav-list>
+        <!--<button (click)="goToTab()" > Tableau </button>-->
+        <button mat-stroked-button style="width: 150px" color="warn" (click)="goToTab()">Federations</button>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <app-home *ngIf="verif" [id]="federationId" ></app-home>
+      <app-table *ngIf="!verif" (id)="eventfun($event)"></app-table>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
+
+
+
+

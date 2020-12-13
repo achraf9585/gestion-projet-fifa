@@ -1,0 +1,62 @@
+<div class="content" fxLayout="row wrap" fxLayoutAlign="center none" fxLayoutGap="16px grid" >
+  <form  #userAchat="ngForm" [(ngModel)]="federationAdd">
+    <div fxFlex="65%" fxFlex.xs="100%" fxFlex.sm="33%" >
+
+        <br>
+        <br>
+
+        <div class="example-container">
+
+
+          <mat-form-field class="example-full-width " >
+            <mat-label>Nom</mat-label>
+            <textarea matInput  id="nom" [(ngModel)]="federation.nom"
+                      required  [ngModelOptions]="{standalone: true}" name="nom" #nom="ngModel"  rows="1" cols="20"></textarea>
+            <mat-error
+              *ngIf="federationAdd.controls['nom'].hasError('required')&& federationAdd.controls['nom'].invalid && federationAdd.controls['nom'].touched"
+
+
+           >le nom est obligatoire</mat-error>
+
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Annee de fondation</mat-label>
+            <input matInput required  [ngModelOptions]="{standalone: true}" type="text" pattern="\d*" maxlength="4" [(ngModel)]="federation.annee" name="annee" #annee="ngModel"  id="annee">
+
+            <mat-error
+              *ngIf="federationAdd.controls['annee'].hasError('required')&& federationAdd.controls['annee'].invalid && federationAdd.controls['annee'].touched"
+
+
+
+            >l' annee  est obligatoire ou doit etre numérique </mat-error>
+
+          </mat-form-field>
+
+
+
+        </div>
+<br>
+        <p-autoComplete [(ngModel)]="federation.pays"  name="pays" [suggestions]="filteredCountriesSingle" (completeMethod)="filterCountrySingle($event)" field="name" [size]="30"
+        required                    placeholder="pays" [minLength]="1" dropdown="true" #pays="ngModel"   id="country"
+
+        >
+
+          <mat-error
+            *ngIf="federationAdd.controls['pays'].hasError('required') && federationAdd.controls['pays'].invalid &&  federationAdd.controls['pays'].touched "
+
+
+
+          >le pays est obligatoire</mat-error>
+        </p-autoComplete>
+
+        <br>
+        <br>
+        <button [disabled]="userAchat.invalid" type="button" class="btn btn-danger btn-lg btn-block" (click)="save(nom , annee , pays)" >
+          Creer
+        </button>
+
+    </div>
+  </form>
+</div>
+
+
